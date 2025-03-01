@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { MaterialService } from './material.service';
 import { Material } from './material.schema';
 
@@ -6,13 +6,15 @@ import { Material } from './material.schema';
 export class MaterialController {
   constructor(private readonly materialService: MaterialService) {}
 
-  @Post()
-  async create(@Body() materialData: Partial<Material>): Promise<Material> {
-    return this.materialService.create(materialData);
-  }
-
+  // Ruta para obtener todos los materiales
   @Get()
   async findAll(): Promise<Material[]> {
     return this.materialService.findAll();
+  }
+
+  // Ruta para crear un nuevo material
+  @Post()
+  async create(@Body() materialData: Material): Promise<Material> {
+    return this.materialService.create(materialData);
   }
 }
