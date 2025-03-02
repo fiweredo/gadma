@@ -1,14 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-import * as dotenv from 'dotenv';
-dotenv.config();
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), // Carga las variables de entorno del archivo .env
-    MongooseModule.forRoot(process.env.MONGO_URI), // Conexión a MongoDB
+    ConfigModule.forRoot(), // Carga las variables del archivo .env
+    MongooseModule.forRoot(process.env.MONGO_URI || 'mongodb://localhost:27017/gadma'), // Usa el valor por defecto si no está definido
   ],
-  exports: [MongooseModule],
 })
 export class DatabaseModule {}
