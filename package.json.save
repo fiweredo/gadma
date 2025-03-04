@@ -6,7 +6,7 @@
   "devDependencies": {
     "nodemon": "^3.1.9"
   },
-  "scripts": {
-    "start": "nodemon --exec 'nest start' --watch src"
-  }
+ "scripts": {
+  "start": "nest start"
+ }
 }
