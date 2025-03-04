@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { MaterialService } from './material.service';
-import { Material } from './material.schema';
+import { CreateMaterialDto } from './material.dto'; // Asegúrate de importar correctamente el DTO
+import { Material } from './material.schema'; // El esquema de Material
 
 @Controller('material')
 export class MaterialController {
@@ -9,12 +10,12 @@ export class MaterialController {
   // Ruta para obtener todos los materiales
   @Get()
   async findAll(): Promise<Material[]> {
-    return this.materialService.findAll();
+    return this.materialService.findAll(); // Llama al servicio para obtener todos los materiales
   }
 
   // Ruta para crear un nuevo material
   @Post()
-  async create(@Body() materialData: Material): Promise<Material> {
-    return this.materialService.create(materialData);
+  async create(@Body() createMaterialDto: CreateMaterialDto): Promise<Material> {
+    return this.materialService.create(createMaterialDto); // Crea un material usando el DTO
   }
 }

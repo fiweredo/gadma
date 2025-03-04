@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Material } from './material.schema';
+import { CreateMaterialDto } from './material.dto';
 
 @Injectable()
 export class MaterialService {
@@ -9,10 +10,10 @@ export class MaterialService {
     @InjectModel(Material.name) private materialModel: Model<Material>,
   ) {}
 
-  // Crear un nuevo material
-  async create(materialData: Material): Promise<Material> {
-    const createdMaterial = new this.materialModel(materialData);
-    return createdMaterial.save();
+  // Crear un material
+  async create(createMaterialDto: CreateMaterialDto): Promise<Material> {
+    const createdMaterial = new this.materialModel(createMaterialDto);
+    return createdMaterial.save(); // Guarda el material en la base de datos
   }
 
   // Obtener todos los materiales
